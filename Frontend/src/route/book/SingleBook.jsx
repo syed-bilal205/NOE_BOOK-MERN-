@@ -36,7 +36,7 @@ function SingleBook() {
 
   return (
     <div>
-      <Link to={"/books"}>🔙 Books</Link>
+      <Link to={"/"}>🔙 Books</Link>
 
       <div className="bookdetails">
         <div className="col-1">
