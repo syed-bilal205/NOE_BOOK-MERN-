@@ -24,15 +24,15 @@ function SingleBook() {
     fetchData();
   }, []);
 
-  //   function StarRating({ numberOfStars }) {
-  //     const stars = [];
+  function StarRating({ numberOfStars }) {
+    const stars = [];
 
-  //     for (let i = 0; i < numberOfStars; i++) {
-  //       stars.push(<span key={i}>⭐</span>);
-  //     }
+    for (let i = 0; i < numberOfStars; i++) {
+      stars.push(<span key={i}>⭐</span>);
+    }
 
-  //     return <div>Rating: {stars}</div>;
-  //   }
+    return <div>Rating: {stars}</div>;
+  }
 
   return (
     <div>
@@ -50,7 +50,7 @@ function SingleBook() {
         <div className="col-2">
           <h1>{data?.title}</h1>
           <p>{data?.description}</p>
-          {/* <StarRating numberOfStars={data?.stars} /> */}
+          <StarRating numberOfStars={data?.stars} />
 
           <p>Category</p>
           <ul>

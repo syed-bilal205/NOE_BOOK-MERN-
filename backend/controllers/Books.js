@@ -1,4 +1,5 @@
 const Books = require("../model/Books");
+const multer = require("multer");
 
 // TO GET THE ALL THE BOOKS
 const getAllTheBooks = async (req, res) => {
@@ -33,7 +34,42 @@ const getTheBook = async (req, res) => {
   }
 };
 
+// CREATE THE BOOK
+
+// MULTER
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+const createTheBook = async (req, res) => {
+  try {
+    const newBook = new Books({
+      title: req.body.title,
+      slug: req.body.slug,
+      stars: req.body.stars,
+      description: req.body.description,
+      category: req.body.category,
+      thumbnail: req.file.filename,
+    });
+
+    await Books.create(newBook);
+    res.json("Data Submitted");
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while fetching books." });
+  }
+};
+
 module.exports = {
   getAllTheBooks,
   getTheBook,
+  createTheBook,
+  upload,
 };
